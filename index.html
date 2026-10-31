@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mareike Benkner-Schuh - Praxis für Zahnheilkunde</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        /* Typography & Colors */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            color: #1a4971; /* Medical Blue */
+        }
+        .text-primary { color: #0596de !important; }
+        .bg-primary { background-color: #0596de !important; }
+        .text-secondary { color: #6c757d !important; }
+
+        /* Navigation */
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background-color: rgba(255, 255, 255, 0.98) !important;
+        }
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .nav-link {
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            color: #1a4971 !important;
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #0596de !important;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f8f9fa 100%);
+            text-align: center;
+            border-bottom: 1px solid #eaeaea;
+        }
+        .hero-icon {
+            font-size: 5rem;
+            color: #0596de;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+        .section-title {
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: #0596de;
+            border-radius: 2px;
+        }
+
+        /* Accordion Customization for Services */
+        .accordion-button:not(.collapsed) {
+            color: #0596de;
+            background-color: #f0f9ff;
+            box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+        }
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: rgba(0,0,0,.125);
+        }
+
+        /* Team Section */
+        .team-card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            background-color: #e9ecef;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            color: #adb5bd;
+            font-size: 2.5rem;
+        }
+
+        /* Contact & Termine */
+        .info-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+        .hours-list {
+            list-style: none;
+            padding: 0;
+        }
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+        .hours-list strong {
+            color: #1a4971;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a4971;
+            color: #fff;
+            padding: 40px 0 20px;
+        }
+        footer a {
+            color: #b3d4ec;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: #fff;
+        }
+
+        /* Floating Booking Button */
+        .floating-booking {
+            position: fixed;
+            z-index: 2000;
+            top: 180px;
+            right: 0;
+            display: block;
+            text-align: center;
+            opacity: 0.95;
+            background-color: #0596de;
+            color: #ffffff;
+            font-size: 14px;
+            width: 110px;
+            border-radius: 8px 0 0 8px;
+            text-decoration: none;
+            padding: 12px 10px;
+            line-height: 1.4;
+            box-shadow: -3px 3px 15px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+        .floating-booking:hover {
+            opacity: 1;
+            width: 120px;
+            color: #ffffff;
+            background-color: #0482c2;
+        }
+        .floating-booking img {
+            height: 16px;
+            margin-top: 8px;
+            vertical-align: middle;
+            width: auto;
+            filter: brightness(0) invert(1); /* Makes Doctolib logo white if not already */
+        }
+        
+        /* Mobile Compact Floating Button */
+        @media (max-width: 767px) {
+            .floating-booking {
+                width: 80px;
+                padding: 10px 5px;
+                font-size: 11px;
+            }
+            .floating-booking span {
+                font-size: 11px;
+                font-weight: normal !important;
+            }
+            .floating-booking i {
+                margin-top: 4px !important;
+                font-size: 1.2rem;
+            }
+            .floating-booking:hover {
+                width: 85px;
+            }
+        }
+		
+		/* Scroll to Top Button */
+        #scrollToTopBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            background-color: #0596de;
+            color: #ffffff;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        #scrollToTopBtn:hover {
+            background-color: #0482c2;
+            transform: translateY(-3px);
+        }
+        #scrollToTopBtn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="70">
+
+    <!-- Floating Action Button for Booking -->
+    <a href="https://www.doctolib.de/zahnarztpraxis/neckarsulm/mareike-benkner-schuh-praxis-fuer-zahnheilkunde?utm_campaign=website-button&utm_source=mareike-benkner-schuh-praxis-fuer-zahnheilkunde-website-button&utm_medium=referral&utm_content=option-8&utm_term=mareike-benkner-schuh-praxis-fuer-zahnheilkunde" 
+       class="floating-booking" rel="noopener noreferrer" target="_blank">
+        <span style="font-weight: 600;">Termin<br>online buchen</span>
+        <br>
+        <i class="fas fa-calendar-check mt-2 fa-lg"></i>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#home">
+                <i class="fas fa-tooth text-primary fa-2x me-2"></i>
+                <span style="font-weight: 700; color: #1a4971; font-size: 1.1rem; line-height: 1.2;">
+                    Mareike Benkner-Schuh<br>
+                    <small style="font-weight: 400; font-size: 0.8rem; color: #6c757d;">Praxis für Zahnheilkunde</small>
+                </span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#termine">Srechstunde</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#leistung">Leistung</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#kontakt">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section" id="home">
+        <div class="container">
+            <i class="fas fa-tooth hero-icon"></i>
+            <h1 class="display-4 fw-bold">Praxis für Zahnheilkunde</h1>
+            <h2 class="h3 text-secondary mb-4">Mareike Benkner-Schuh</h2>
+            <p class="lead mb-1 max-w-2xl mx-auto" style="max-width: 600px; margin: 0 auto;">
+                Moderne Zahnmedizin in entspannter Atmosphäre. Wir kümmern uns um Ihr strahlendes Lächeln und Ihre Zahngesundheit.
+            </p>
+        </div>
+    </header>
+
+    <!-- Sprechzeiten & Termine Section -->
+    <section id="termine" class="bg-white">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Sprechstunde</h2>
+            </div>
+            <div class="row justify-content-center mt-1 text-center text-md-start">
+                <div class="col-md-8 col-lg-6">
+                    <div class="info-box bg-light border-0">
+                        <div class="row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <h5 class="text-primary mb-3"><i class="fas fa-phone-alt me-2"></i> Kontakt</h5>
+                                <p class="mb-1">Telefon:<a href="tel:071326969"> 07132 69 69</a></p>
+                                <p class="mb-3">
+                                    Termine: <a href="https://www.doctolib.de/zahnarztpraxis/neckarsulm/mareike-benkner-schuh-praxis-fuer-zahnheilkunde?utm_campaign=website-button&utm_source=mareike-benkner-schuh-praxis-fuer-zahnheilkunde-website-button&utm_medium=referral&utm_content=option-8&utm_term=mareike-benkner-schuh-praxis-fuer-zahnheilkunde" target="_blank" class="fw-bold text-decoration-none">Online vereinbaren</a>
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <h5 class="text-primary mb-3"><i class="far fa-clock me-2"></i> Zeiten</h5>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2"><strong>Mo, Do</strong><br>08:00 - 12:00 Uhr<br>14:00 - 18:00 Uhr</li>
+                                    <li class="mb-2"><strong>Di</strong><br>08:00 - 12:00 Uhr<br>14:00 - 17:00 Uhr</li>
+                                    <li><strong>Mi</strong><br>07:00 - 12:00 Uhr</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leistung Section -->
+    <section id="leistung" class="bg-light">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Unsere Leistungen</h2>
+            </div>
+            
+            <!-- Accordion for Mobile-Friendly reading of long texts -->
+            <div class="accordion mt-2" id="leistungenAccordion">
+                
+                <!-- Ästhetische Zahnheilkunde -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <i class="fas fa-magic me-2 text-primary"></i> Ästhetische Zahnheilkunde
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#leistungenAccordion">
+                        <div class="accordion-body">
+                            <p>Auch wer nicht in Hollywood vor der Kamera steht, glänzt gerne mit schönen Zähnen. Hässliche Verfärbungen, abgebrochene Ecken oder unschöne Zahnformen- und Stellungen können die Optik stark beeinträchtigen und eine große Belastung darstellen.</p>
+                            <p>In der modernen Zahnmedizin stehen heute zahlreiche Methoden zur Auswahl, verfärbte Zähne, unregelmäßige Zahnreihen und durch Karies verursachte Zahndefekte wieder in ein strahlendes Lächeln zu verwandeln. Wir bieten Ihnen in unserer Praxis alle Maßnahmen wie Bleaching, Inlays, Veneers, Kronen und Brücken an, damit Sie wieder richtig lachen können.</p>
+                            
+                            <h5 class="mt-4">Bleaching</h5>
+                            <p>Weiße Zähne-für ein strahlendes Lächeln. Schöne weiße Zähne gelten als Zeichen von Gesundheit, Leistungsfähigkeit und Attraktivität... (Bleaching ist ein kosmetisches Verfahren, welches die schonende Aufhellung natürlicher Zähne mit aktivem Sauerstoff ermöglicht.)</p>
+                            
+                            <h5 class="mt-4">Keramik-Inlays</h5>
+                            <p>Labortechnisch hergestellte Keramikinlays bilden Form und Farbe der eigenen Zähne perfekt nach und können von natürlichen Zähnen nicht mehr unterschieden werden.</p>
+
+                            <h5 class="mt-4">Kompositfüllungen</h5>
+                            <p>Komposite sind zahnfarbene Füllungsmaterialien, die kleine Zahndefekte in der Front unsichtbar werden lassen.</p>
+
+                            <h5 class="mt-4">Kronen und Brücken</h5>
+                            <p>Größere Defekte an den Zähnen können nur durch Kronen behoben werden, die den gesamten Zahn wie eine Kappe umfassen.</p>
+
+                            <h5 class="mt-4">Veneers</h5>
+                            <p>Veneers sind hauchdünne Schalen aus Keramik, die auf die Frontzähne aufgeklebt werden. Hierbei besteht die Möglichkeit, kleine Defekte, schiefe Zahnstellungen oder Lücken zwischen den Zähnen unter größtmöglicher Schonung der Zahnsubstanz zu korrigieren.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Implantate -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <i class="fas fa-tools me-2 text-primary"></i> Implantate
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#leistungenAccordion">
+                        <div class="accordion-body">
+                            <p><strong>Für ein lückenloses Lächeln.</strong></p>
+                            <p>Jeder wünscht sich ein lückenloses und strahlendes Lächeln. Sind jedoch eigene Zähne verloren gegangen, bieten implantatgetragene Zähne die eleganteste Lösung für fehlende Zähne.</p>
+                            <p>Implantate sind künstliche Zahnwurzeln aus Titan, die schonend in den Knochen eingebracht werden. Sie sind dabei körperverträglich und gewebefreundlich, ebenso verhindert die künstliche Titanwurzel einen weiteren Knochenabbau, da sie den Kieferknochen stabilisiert. Wie natürliche Wurzeln können Implantate einen Zahnersatz in Form einer Krone, Brücke oder einer Prothese aufnehmen.</p>
+                            <p>Gerne beantworten wir Ihre Fragen in einem persönlichen Gespräch.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kiefergelenk -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <i class="fas fa-bone me-2 text-primary"></i> Kiefergelenk
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#leistungenAccordion">
+                        <div class="accordion-body">
+                            <p>Mit Hilfe des Kiefergelenkes und der Kaumuskulatur können Sie Ihren Mund öffnen, schließen, kauern und abbeißen. Für eine gute Funktion ist das richtige Zusammenspiel von Gelenkköpfchen und Gelenkpfanne, der Gelenkzwischenscheibe, den Bändern, der Muskulatur sowie der Zähne erforderlich.</p>
+                            <p>Ist dieses Zusammenspiel gestört, spricht man von einer <strong>craniomandibulären Dysfunktion (CMD)</strong>. Die häufigsten Ursachen sind Stress und seelische Belastungen und damit einhergehendes, nächtliches Zähneknirschen oder Pressen.</p>
+                            <p>Zur Behandlung der CMD ist eine häufige und wirkungsvolle Therapie die Herstellung einer sogenannten Aufbissschiene (Michigan-Schiene), die zur Entlastung des Kausystems führt.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Laserbehandlung -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <i class="fas fa-bolt me-2 text-primary"></i> Laserbehandlung
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#leistungenAccordion">
+                        <div class="accordion-body">
+                            <p><strong>Laser in der Zahnheilkunde - die Innovation.</strong></p>
+                            <p>Laser werden in der Zahnheilkunde für die unterschiedlichsten Behandlungen eingesetzt. Sprechen Sie uns an. Wir beraten Sie gerne.</p>
+                            <ul>
+                                <li><strong>Empfindliche Zähne:</strong> Bei freiliegenden Zahnhälsen erreicht der Softlaser eine sofortige Besserung von Sensibilitätsstörungen.</li>
+                                <li><strong>Endodontie:</strong> Bei der Wurzelkanalbehandlung wird die Keimzahl durch einen Laser effektiv und schmerzfrei reduziert.</li>
+                                <li><strong>Herpes/Aphten:</strong> Das moderne Laserverfahren ist äußerst gewebeschonend und völlig schmerzfrei. Die schmerzhaften Schwellungen klingen rasch ab.</li>
+                                <li><strong>Zahnärztliche Chirurgie:</strong> Fibrome, Lippenbänder etc. können blutungsfrei und schmerzarm beseitigt werden.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prophylaxe -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFive">
+                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            <i class="fas fa-shield-alt me-2 text-primary"></i> Prophylaxe
+                        </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#leistungenAccordion">
+                        <div class="accordion-body">
+                            <p><strong>Gesunde Zähne-ein Leben lang.</strong></p>
+                            <p>Unser Anspruch ist es, dass Sie Ihre eigenen Zähne möglichst ein Leben lang erhalten können. Neben einer guten häuslichen Zahnpflege gehört auch die professionelle Zahnreinigung bei uns in der Praxis dazu.</p>
+                            
+                            <h5 class="mt-3">Professionelle Zahnreinigung</h5>
+                            <p>Mit einer optimalen häuslichen Zahnpflege reinigen Sie zirka 70 % aller Zahnflächen. Für die übrigen 30 % bedarf es der professionellen Zahnreinigung (PZR). Mit speziellen Geräten (Airflow, Ultraschall) werden Verfärbungen und Zahnstein beseitigt.</p>
+
+                            <h5 class="mt-3">Fluoridierung & Kinderprophylaxe</h5>
+                            <p>Fluoride machen die Zähne widerstandsfähiger. Für Kinder bieten wir zahnärztliche Früherkennungsuntersuchungen und Individualprophylaxe-Programme an.</p>
+
+                            <h5 class="mt-3">Mundhygieneberatung</h5>
+                            <p>Unsere Prophylaxemitarbeiterinnen entwickeln mit Ihnen ein Zahnpflegeprogramm, das individuell auf Ihre Bedürfnisse abgestimmt ist.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="bg-white">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Unser Team</h2>
+            </div>
+            
+            <div class="row mt-2 g-4 justify-content-center">
+                <!-- Zahnärztin -->
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="card team-card text-center h-100 p-4 border-0 bg-light">
+                        <img src="team/Mareike_Benkner-Schuh.jpg" alt="Mareike Benkner-Schuh" class="rounded-circle mx-auto mb-3 shadow-sm" style="width: 140px; height: 140px; object-fit: cover;object-position: center top;">
+                        <h4>Mareike Benkner-Schuh</h4>
+                        <p class="text-primary fw-bold">Zahnärztin</p>
+                        <p class="small text-muted mb-3">Studium an der Ruprecht-Karls-Universität Heidelberg. Ermächtigung als Fortbildungspraxis (LZK BW).</p>
+						<ul class="list-unstyled small text-start ps-3" style="border-left: 2px solid #0596de;">
+                            <li>Ästhetische Zahnheilkunde</li>
+                            <li>Funktionsdiagnostik</li>
+                            <li>Prothetik & Parodontologie</li>
+                            <li>Laserbehandlung & Endodontie</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2 g-4 justify-content-center">
+                <!-- Assistenz -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card team-card text-center h-100 p-3 border-0 bg-light">
+                        <img src="team/Anna_Hartmann.jpg" alt="Anna Hartmann" class="rounded-circle mx-auto mb-3 shadow-sm" style="width: 90px; height: 90px; object-fit: cover; object-position: center top;">
+                        <h6 class="mb-1">Anna Hartmann</h6>
+                        <span class="small text-muted" style="font-size: 0.75rem;">Zahnmedizinische Fachangestellte / Prophylaxe / Abrechnung</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card team-card text-center h-100 p-3 border-0 bg-light">
+                        <img src="team/Daniela_Thiele.jpg" alt="Daniela Thiele" class="rounded-circle mx-auto mb-3 shadow-sm" style="width: 90px; height: 90px; object-fit: cover;">
+                        <h6 class="mb-1">Daniela Thiele</h6>
+                        <span class="small text-muted" style="font-size: 0.75rem;">Zahnmedizinische Fachangestellte / Rezeption</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card team-card text-center h-100 p-3 border-0 bg-light">
+                        <img src="team/Steffi_Frank.jpg" alt="Steffi Frank" class="rounded-circle mx-auto mb-3 shadow-sm" style="width: 90px; height: 90px; object-fit: cover;">
+                        <h6 class="mb-1">Steffi Frank</h6>
+                        <span class="small text-muted" style="font-size: 0.75rem;">Zahnmedizinische Fachangestellte / Prophylaxe / Rezeption</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card team-card text-center h-100 p-3 border-0 bg-light">
+                        <img src="team/Mayleen_Lika.jpg" alt="Mayleen Lika" class="rounded-circle mx-auto mb-3 shadow-sm" style="width: 90px; height: 90px; object-fit: cover;">
+                        <h6 class="mb-1">Mayleen Lika</h6>
+                        <span class="small text-muted" style="font-size: 0.75rem;">Zahnmedizinische Fachangestellte / Prophylaxe</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card team-card text-center h-100 p-3 border-0 bg-light">
+                        <img src="team/Sevval_Altintas.jpg" alt="Sevval Altintas" class="rounded-circle mx-auto mb-3 shadow-sm" style="width: 90px; height: 90px; object-fit: cover;">
+                        <h6 class="mb-1">Sevval Altintas</h6>
+                        <span class="small text-muted" style="font-size: 0.75rem;">Zahnmedizinische Fachangestellte / Prophylaxe</span>
+                    </div>
+                </div>
+
+                <!-- Zahntechnikerinnen -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card team-card text-center h-100 p-3 border-0 bg-light">
+                        <img src="team/Michaela_Gotzler.jpg" alt="Michaela Gotzler" class="rounded-circle mx-auto mb-3 shadow-sm" style="width: 90px; height: 90px; object-fit: cover;">
+                        <h6 class="mb-1">Michaela Gotzler</h6>
+                        <span class="small text-muted" style="font-size: 0.75rem;">Zahntechnikerin</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card team-card text-center h-100 p-3 border-0 bg-light">
+                        <img src="team/Katherina_Bischoff.jpg" alt="Katherina Bischoff" class="rounded-circle mx-auto mb-3 shadow-sm" style="width: 90px; height: 90px; object-fit: cover;">
+                        <h6 class="mb-1">Katherina Bischoff</h6>
+                        <span class="small text-muted" style="font-size: 0.75rem;">Zahntechnikerin</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card team-card text-center h-100 p-3 border-0 bg-light">
+                        <img src="team/Niyosha_Shadnab_Hayder_Tehrani.jpg" alt="Niyosha S. H. Tehrani" class="rounded-circle mx-auto mb-3 shadow-sm" style="width: 90px; height: 90px; object-fit: cover;">
+                        <h6 class="mb-1">Niyosha S. H. Tehrani</h6>
+                        <span class="small text-muted" style="font-size: 0.75rem;">Auszubildende zur zahnmedizinischen Fachangestellten</span>
+                    </div>
+                </div>
+
+                <!-- Azubis -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card team-card text-center h-100 p-3 border-0 bg-light">
+                        <img src="team/Michelle_Fric.jpg" alt="Michelle Fric" class="rounded-circle mx-auto mb-3 shadow-sm" style="width: 90px; height: 90px; object-fit: cover;">
+                        <h6 class="mb-1">Michelle Fric</h6>
+                        <span class="small text-muted" style="font-size: 0.75rem;">Auszubildende zur zahnmedizinischen Fachangestellten</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card team-card text-center h-100 p-3 border-0 bg-light">
+                        <img src="team/Anastasia_Delicatnaia.jpg" alt="Anastasia Delicatnaia" class="rounded-circle mx-auto mb-3 shadow-sm" style="width: 90px; height: 90px; object-fit: cover;">
+                        <h6 class="mb-1">Anastasia Delicatnaia</h6>
+                        <span class="small text-muted" style="font-size: 0.75rem;">Auszubildende zur zahnmedizinischen Fachangestellten</span>
+                    </div>
+                </div>
+
+                <!-- Praxismanagement -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card team-card text-center h-100 p-3 border-0 bg-light">
+                        <img src="team/Claudia_Wecker.jpg" alt="Claudia Wecker" class="rounded-circle mx-auto mb-3 shadow-sm" style="width: 90px; height: 90px; object-fit: cover; object-position: center top;">
+                        <h6 class="mb-1">Claudia Wecker</h6>
+                        <span class="small text-muted" style="font-size: 0.75rem;">Praxismanagement</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontakt Section -->
+    <section id="kontakt" class="bg-light border-top">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="info-box bg-white">
+                        <h2 class="h3 mb-4 text-center"><i class="fas fa-map-marker-alt text-primary me-2"></i> Kontakt & Anfahrt</h2>
+                        
+                        <div class="row mb-4 align-items-center text-center text-md-start">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <p class="mb-1"><strong>Zahnarztpraxis Neckarsulm Benkner-Schuh</strong></p>
+                                <p class="mb-0">Marktstraße 8<br>74172 Neckarsulm</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-1"><i class="fas fa-phone me-2 text-secondary"></i> <strong>Telefon:</strong><a href="tel:071326969">07132 69 69</a></p>
+                                <p class="mb-1"><i class="fas fa-fax me-2 text-secondary"></i> <strong>Fax:</strong> 07132 54 25</p>
+                                <p class="mb-0"><i class="fas fa-envelope me-2 text-secondary"></i> <span class="email-kontakt">E-Mail wird geladen...</span></p>
+                            </div>
+                        </div>
+
+                        <!-- DSGVO Google Maps Two-Click Solution -->
+                        <div class="rounded overflow-hidden shadow-sm mt-4 bg-light d-flex align-items-center justify-content-center text-center" id="mapPlaceholder" style="border: 1px solid #dee2e6; height: 400px;">
+                            <div class="p-4">
+                                <i class="fas fa-map-marked-alt fa-3x text-secondary mb-3"></i>
+                                <h5>Google Maps aktivieren</h5>
+                                <p class="small text-muted mb-3 mx-auto" style="max-width: 500px;">Wenn Sie die Karte laden, werden Daten an Google übertragen. Weitere Informationen finden Sie in unserer Datenschutzerklärung.</p>
+                                <button class="btn btn-outline-primary" onclick="loadMap()">Karte laden (Datenschutz zustimmen)</button>
+                            </div>
+                        </div>
+                        <div id="mapContainer" class="rounded overflow-hidden shadow-sm mt-4 d-none" style="height: 400px; border: 1px solid #dee2e6;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <div class="mb-4">
+                <i class="fas fa-tooth fa-2x mb-3"></i>
+                <h5>Mareike Benkner-Schuh</h5>
+                <p class="small text-white-50">Praxis für Zahnheilkunde</p>
+            </div>
+            <div class="d-flex justify-content-center gap-4 mb-4">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#impressumModal">Impressum</a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#datenschutzModal">Datenschutz</a>
+            </div>
+            <p class="small text-white-50 m-0">&copy; <span id="year"></span> Zahnarztpraxis Benkner-Schuh. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <!-- Modals for Legal Text to keep single page clean -->
+    
+    <!-- Impressum Modal -->
+    <div class="modal fade" id="impressumModal" tabindex="-1" aria-labelledby="impressumModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="impressumModalLabel">Impressum</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body small">
+                    <h6>Angaben gemäß § 5 TMG:</h6>
+                    <p>Zahnarztpraxis Benkner-Schuh<br>Markstraße 8<br>74172 Neckarsulm</p>
+                    
+                    <h6>Vertreten durch:</h6>
+                    <p>Mareike Benkner-Schuh</p>
+                    
+                    <h6>Kontakt:</h6>
+                    <p>Telefon: 07132 / 6969<br>Telefax: 07132 / 5425<br>E-Mail: <span class="email-kontakt">E-Mail wird geladen...</span><br>Web: http://www.zahnarztpraxis-neckarsulm.de</p>
+                    
+                    <h6>Aufsichtsbehörde:</h6>
+                    <p>Kassenzahnärztliche Vereinigung Baden-Württemberg - Stuttgart</p>
+                    
+                    <h6>Berufsbezeichnung & Kammer:</h6>
+                    <p>Zahnarzt / Zahnärztin. Verliehen durch: Deutschland<br>
+                    Zuständige Kammer: Landeszahnärztekammer Baden-Württemberg - Albstadtweg 9, 70567 Stuttgart</p>
+                    
+                    <h6>Berufsrechtliche Regelungen:</h6>
+                    <p>Zahnheilkundegesetz - Heilberufe-Kammergesetz - Gebührenordnung für Zahnärzte - Berufsordnung für Zahnärzte<br>
+                    Regelungen einsehbar unter: http://www.lzkbw.de/Patienten/Gesetze_Ordnungen/index.php</p>
+                    
+                    <h6>Haftungsausschluss (Disclaimer)</h6>
+                    <strong>Haftung für Inhalte</strong>
+                    <p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen...</p>
+                    <strong>Haftung für Links</strong>
+                    <p>Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen...</p>
+                    <strong>Urheberrecht</strong>
+                    <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht...</p>
+                    <p class="text-muted mt-3">Quelle: eRecht24 Disclaimer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Datenschutz Modal -->
+    <div class="modal fade" id="datenschutzModal" tabindex="-1" aria-labelledby="datenschutzModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="datenschutzModalLabel">Datenschutzerklärung</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body small">
+                    <p>Diese Datenschutzerklärung klärt Sie über die Art, den Umfang und Zweck der Verarbeitung von personenbezogenen Daten (nachfolgend kurz „Daten“) innerhalb unseres Onlineangebotes auf.</p>
+                    
+                    <h6>Verantwortlicher</h6>
+                    <p>Mareike Benkner-Schuh<br>Markstraße 8<br>74172 Neckarsulm<br>E-Mail: <span class="email-kontakt">E-Mail wird geladen...</span></p>
+                    
+                    <h6>Arten der verarbeiteten Daten:</h6>
+                    <ul>
+                        <li>Bestandsdaten (z.B., Namen, Adressen).</li>
+                        <li>Kontaktdaten (z.B., E-Mail, Telefonnummern).</li>
+                        <li>Inhaltsdaten (z.B., Texteingaben, Fotografien, Videos).</li>
+                        <li>Nutzungsdaten (z.B., besuchte Webseiten, Interesse an Inhalten, Zugriffszeiten).</li>
+                        <li>Meta-/Kommunikationsdaten (z.B., Geräte-Informationen, IP-Adressen).</li>
+                    </ul>
+
+                    <h6>Zweck der Verarbeitung</h6>
+                    <ul>
+                        <li>Zurverfügungstellung des Onlineangebotes, seiner Funktionen und Inhalte.</li>
+                        <li>Beantwortung von Kontaktanfragen und Kommunikation mit Nutzern.</li>
+                        <li>Sicherheitsmaßnahmen.</li>
+                        <li>Reichweitenmessung/Marketing</li>
+                    </ul>
+
+                    <h6>Sicherheitsmaßnahmen</h6>
+                    <p>Wir treffen nach Maßgabe des Art. 32 DSGVO unter Berücksichtigung des Stands der Technik geeignete technische und organisatorische Maßnahmen, um ein dem Risiko angemessenes Schutzniveau zu gewährleisten...</p>
+                    
+                    <h6>Rechte der betroffenen Personen</h6>
+                    <p>Sie haben das Recht, eine Bestätigung darüber zu verlangen, ob betreffende Daten verarbeitet werden und auf Auskunft über diese Daten. Sie haben entsprechend. Art. 16 DSGVO das Recht, die Vervollständigung oder Berichtigung zu verlangen...</p>
+                    
+                    <h6>Cookies und Widerspruchsrecht bei Direktwerbung</h6>
+                    <p>Als „Cookies“ werden kleine Dateien bezeichnet, die auf Rechnern der Nutzer gespeichert werden. Innerhalb der Cookies können unterschiedliche Angaben gespeichert werden...</p>
+                    
+                    <p class="text-muted mt-3">Erstellt mit Datenschutz-Generator.de von RA Dr. Thomas Schwenke</p>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" aria-label="Nach oben scrollen" title="Nach oben">&#8593;</button>
+	
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Set current year in footer
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a.nav-link').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    // Only apply smooth scroll if hash exists and links to current page
+                    if(this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+                        
+                        if(targetElement) {
+                            // Close mobile menu if open
+                            const navbarCollapse = document.getElementById('navbarResponsive');
+                            if(navbarCollapse.classList.contains('show')) {
+                                let bsCollapse = new bootstrap.Collapse(navbarCollapse, {toggle: false});
+                                bsCollapse.hide();
+                            }
+                            
+                            // Scroll to element accounting for fixed navbar offset
+                            const yOffset = -70; 
+                            const y = targetElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                            window.scrollTo({top: y, behavior: 'smooth'});
+                        }
+                    }
+                });
+            });
+        });
+
+        // DSGVO Map Loading
+        function loadMap() {
+            const placeholder = document.getElementById('mapPlaceholder');
+            const container = document.getElementById('mapContainer');
+            
+            // Set the iframe HTML
+            container.innerHTML = '<iframe src="https://maps.google.com/maps?q=Marktstra%C3%9Fe%208,%2074172%20Neckarsulm&t=&z=15&ie=UTF8&iwloc=&output=embed" style="width: 100%; height: 100%;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>';
+            
+            // Toggle visibility
+            placeholder.classList.add('d-none');
+            placeholder.classList.remove('d-flex');
+            container.classList.remove('d-none');
+        }
+		
+		// Scroll to Top Logic
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+        
+        window.addEventListener("scroll", function() {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add("show");
+            } else {
+                scrollToTopBtn.classList.remove("show");
+            }
+        });
+        
+        scrollToTopBtn.addEventListener("click", function() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+		
+		const user = "PRAXIS-BENKNER-SCHUH";
+		const domain = "gmx.net";
+		const emailElements = document.querySelectorAll(".email-kontakt");
+
+		emailElements.forEach(function(element) {
+			element.innerHTML = `<a href="mailto:${user}@${domain}">${user}@${domain}</a>`;
+		});
+    </script>
+</body>
+</html>
