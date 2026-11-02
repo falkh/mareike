@@ -320,9 +320,9 @@
                             <div class="col-sm-6">
                                 <h5 class="text-primary mb-3"><i class="far fa-clock me-2"></i> Zeiten</h5>
                                 <ul class="list-unstyled mb-0">
-                                    <li class="mb-2"><strong>Mo, Do</strong><br>08:00 - 12:00 Uhr<br>14:00 - 18:00 Uhr</li>
-                                    <li class="mb-2"><strong>Di</strong><br>08:00 - 12:00 Uhr<br>14:00 - 17:00 Uhr</li>
-                                    <li><strong>Mi</strong><br>07:00 - 12:00 Uhr</li>
+                                    <li class="mb-2"><strong>Montag, Donnerstg</strong><br>08:00 - 12:00 Uhr<br>14:00 - 18:00 Uhr</li>
+                                    <li class="mb-2"><strong>Dienstag</strong><br>08:00 - 12:00 Uhr<br>14:00 - 17:00 Uhr</li>
+                                    <li><strong>Mittwoch</strong><br>07:00 - 12:00 Uhr</li>
                                 </ul>
                             </div>
                         </div>
@@ -830,6 +830,23 @@
 
 		emailElements.forEach(function(element) {
 			element.innerHTML = `<a href="mailto:${user}@${domain}">${user}@${domain}</a>`;
+		});
+		
+		document.addEventListener('shown.bs.collapse', function (event) {
+			// Finde das übergeordnete Akkordeon-Element, das gerade geöffnet wurde
+			const openedPanel = event.target.closest('.accordion-item');
+
+			if (openedPanel) {
+			  // Berechne die Position abzüglich eines kleinen Puffers (z.B. für Menüs oder Abstände)
+			  const offset = 60; 
+			  const panelTop = openedPanel.getBoundingClientRect().top + window.scrollY - offset;
+			  
+			  // Scrolle sanft zu dieser Position
+			  window.scrollTo({
+				top: panelTop,
+				behavior: 'smooth'
+			  });
+			}
 		});
     </script>
 </body>
